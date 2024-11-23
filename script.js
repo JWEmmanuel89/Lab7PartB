@@ -19,24 +19,24 @@ async function fetchApiData() {
     locationElement.textContent = `Your Location: ${city}, ${region}, ${country_name}`;
 
     // Step 3: Get weather using city (OpenWeatherMap API via RapidAPI)
-    // const weatherByCityResponse = await fetch(
-    //   `https://community-open-weather-map.p.rapidapi.com/weather?q=${city}&units=imperial`,
-    //   {
-    //     headers: {
-    //       "X-RapidAPI-Key": "YOUR_RAPIDAPI_KEY",
-    //       "X-RapidAPI-Host": "community-open-weather-map.p.rapidapi.com",
-    //     },
-    //   }
-    // );
-    // const weatherByCityData = await weatherByCityResponse.json();
-    // weatherByIpElement.textContent = `Weather by City: ${weatherByCityData.weather[0].description}, ${weatherByCityData.main.temp}°F`;
+    const weatherByCityResponse = await fetch(
+      `https://community-open-weather-map.p.rapidapi.com/weather?q=${city}&units=imperial`,
+      {
+        headers: {
+          "X-RapidAPI-Key": "YOUR_RAPIDAPI_KEY",
+          "X-RapidAPI-Host": "community-open-weather-map.p.rapidapi.com",
+        },
+      }
+    );
+    const weatherByCityData = await weatherByCityResponse.json();
+    weatherByIpElement.textContent = `Weather by City: ${weatherByCityData.weather[0].description}, ${weatherByCityData.main.temp}°F`;
 
     // // Step 4: Get weather using coordinates (WeatherAPI)
-    // const weatherByLocationResponse = await fetch(
-    //   `https://api.weatherapi.com/v1/current.json?key=YOUR_API_KEY&q=${latitude},${longitude}`
-    // );
-    // const weatherByLocationData = await weatherByLocationResponse.json();
-    // weatherByLocationElement.textContent = `Weather by Location: ${weatherByLocationData.current.condition.text}, ${weatherByLocationData.current.temp_c}°C`;
+    const weatherByLocationResponse = await fetch(
+      `https://api.weatherapi.com/v1/current.json?key=YOUR_API_KEY&q=${latitude},${longitude}`
+    );
+    const weatherByLocationData = await weatherByLocationResponse.json();
+    weatherByLocationElement.textContent = `Weather by Location: ${weatherByLocationData.current.condition.text}, ${weatherByLocationData.current.temp_c}°C`;
   } catch (error) {
     console.error("Error fetching API data:", error);
   }
